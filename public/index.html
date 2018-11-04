@@ -10,7 +10,7 @@
 		#main { display: flex; align-items: center; width: 100vw; height: 100vh; }
 		#chat { display: flex; flex-direction: column; justify-content: space-between; width: 700px; height: 500px; margin: 0 auto; }
 		#chatContainer { overflow: auto; }
-		#overlay { display: flex; align-items: center; position: absolute; top: 0; z-index: 100; width: 100vw; height: 100vh; background: rgba(255, 255, 255, 0.8); }
+		#overlay { display: flex; align-items: center; position: absolute; top: 0; z-index: 10; width: 100vw; height: 100vh; background: rgba(255, 255, 255, 0.8); }
 		#nicknameContainer { display: flex; align-items: center; width: 230px; height: 40px; margin: 0 auto; background: #000; border-radius: 10px; }
 		#nickname { margin: 0 auto; }
 		#nickname input { width: 170px; height: 30px; border: 0; padding: 5px; border-radius: 5px 0 0 5px; }
@@ -23,10 +23,10 @@
 		#messages, #userList { list-style-type: none; margin: 0; padding: 0 }
 		#messages li { padding: 5px 10px; }
 		#messages li:hover { background: #eee; }
-		#userListContainer { position: absolute; top: 0; right: 0; width: 150px; min-height: calc(1em + 10px); }
+		#userListContainer { position: absolute; top: 0; right: 0; width: 150px; min-height: calc(1em + 10px); padding: 5px; }
 		.system { font-weight: bold; }
-		.container { box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2); transition: 0.5s; }
-		.container:hover { box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.5); }
+		.container { background: #fff; box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2); transition: 0.5s; }
+		.container:hover { box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.5); z-index: 15; }
 	</style>
 	<link rel="stylesheet" href="style/style.css" type="text/css">
 	<script src="/socket.io/socket.io.js"></script>
@@ -50,7 +50,7 @@
 	<div id="overlay">
 		<div id="nicknameContainer" class="container">
 			<form id="nickname" action="">
-				<input id="nicknameInput" autocomplete="off" type="text" maxlength="14" placeholder="Your nickname" /><button>Enter</button>
+				<input id="nicknameInput" autocomplete="off" type="text" maxlength="14" placeholder="Your nickname" autofocus /><button>Enter</button>
 			</form>
 		</div>
 	</div>
@@ -68,6 +68,7 @@
 			socket.emit('set nickname', $('#nicknameInput').val(), $('#p').val());
 			$('#overlay').fadeOut(300);
 			$('#nickname input').val('');
+			document.getElementById('messageInput').focus();
 			return false;
 		});
 		$('#message').submit(function() {
@@ -82,7 +83,7 @@
 		});
 		socket.on('send message', function(name, msg) {
 			$('#messages').append($('<li>').text(name + ': ' + msg));
-			$('#chatContainer').animate({ scrollTop: $(document).height() }, 'fast');
+			$('#chatContainer').animate({ scrollTop: $('#chatContainer').height() }, 'fast');
 		});
 	</script>
 </body>
