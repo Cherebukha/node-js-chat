@@ -11,17 +11,17 @@
 		#chat { display: flex; flex-direction: column; justify-content: space-between; width: 700px; height: 500px; margin: 0 auto; }
 		#chatContainer { overflow: auto; }
 		#overlay { display: flex; align-items: center; position: absolute; top: 0; z-index: 10; width: 100vw; height: 100vh; background: rgba(255, 255, 255, 0.8); }
-		#nicknameContainer { display: flex; align-items: center; width: 230px; height: 40px; margin: 0 auto; background: #000; border-radius: 10px; }
+		#nicknameContainer { display: flex; align-items: center; width: 230px; height: 40px; margin: 0 auto; background: #666; border-radius: 20px; }
 		#nickname { margin: 0 auto; }
-		#nickname input { width: 170px; height: 30px; border: 0; padding: 5px; border-radius: 5px 0 0 5px; }
-		#nickname button { width: 50px; height: 30px; border: none; padding: 5px; border-radius: 0 5px 5px 0; }
-		#message { height: 40px; background: #000; padding: 5px; width: 100%; }
-		#message input { width: calc(100% - 70px); height: 30px; border: 0; padding: 5px; }
-		#message button { width: 70px; height: 30px; border: none; padding: 5px; }
-		button { background: rgb(130, 224, 255); }
-		button:hover { background: rgb(110, 190, 216); }
+		#nickname input { width: 170px; height: 30px; border: 0; padding: 5px; padding-left: 10px; border-radius:  15px 0 0 15px; }
+		#nickname button { width: 50px; height: 30px; border: none; padding: 5px; padding-right: 10px; border-radius: 0 15px 15px 0; }
+		#message { height: 40px; background: #666; padding: 5px; width: 100%; }
+		#message input { width: calc(100% - 70px); height: 30px; border: 0; padding: 5px; padding-left: 10px; border-radius: 15px 0 0 15px; }
+		#message button { width: 70px; height: 30px; border: none; padding: 5px; padding-right: 10px; border-radius: 0 15px 15px 0; }
+		button { background: rgb(230, 230, 230); }
+		button:hover { background: rgb(190, 190, 190); }
 		#messages, #userList { list-style-type: none; margin: 0; padding: 0 }
-		#messages li { padding: 5px 10px; }
+		#messages li { padding: 5px 10px; word-wrap: break-word; }
 		#messages li:hover { background: #eee; }
 		#userListContainer { position: absolute; top: 0; right: 0; width: 150px; min-height: calc(1em + 10px); padding: 5px; }
 		.system { font-weight: bold; }
