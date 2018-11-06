@@ -1,10 +1,13 @@
-var app = require('express')();
-var http = require('http').Server(app);
+var express = require('express')();
+var http = require('http').Server(express);
 var io = require('socket.io')(http);
 var userList = [];
 
-app.get('/', function(req, res) {
+express.get('/', function(req, res) {
 	res.sendFile(__dirname + '/public/index.html');
+});
+express.get('/style/style.css', function(req, res) {
+	res.sendFile(__dirname + '/public/style/style.css');
 });
 
 io.on('connection', function(socket) {
