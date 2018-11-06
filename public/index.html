@@ -6,8 +6,9 @@
 	<style>
 		* { margin: 0; padding: 0; box-sizing: border-box; }
 		*:focus { outline: 0; }
-		body, input, button { font: 14px Tahoma; background: repeating-linear-gradient(45deg, #eee, #eee 10px, #ddd 10px, #ddd 20px) }
-		#main { display: flex; align-items: center; width: 100vw; height: 100vh; }
+		body {  }
+		body, input, button { font: 14px Tahoma; }
+		#main { display: flex; align-items: center; max-width: 100%; width: 100vw; max-height: 100%; height: 100vh; background: repeating-linear-gradient(45deg, #ddd, #ddd 10px, #bbb 10px, #bbb 20px); background-size: 28px 28px; animation: background-move 2s linear infinite; }
 		#chat { display: flex; flex-direction: column; justify-content: space-between; width: 700px; height: 500px; margin: 0 auto; }
 		#chatContainer { overflow: auto; }
 		#overlay { display: flex; align-items: center; position: absolute; top: 0; z-index: 10; width: 100vw; height: 100vh; background: rgba(255, 255, 255, 0.8); }
@@ -23,10 +24,17 @@
 		#messages, #userList { list-style-type: none; margin: 0; padding: 0 }
 		#messages li { padding: 5px 10px; word-wrap: break-word; }
 		#messages li:hover { background: #eee; }
-		#userListContainer { position: absolute; top: 0; right: 0; width: 150px; min-height: calc(1em + 10px); padding: 5px; }
+		#userListContainer { position: absolute; top: 0; right: 0; width: 50px; min-height: 50px; max-height: 50px; border-bottom-left-radius: 100%; padding: 1em; }
+		#userListContainer * { opacity: 0; transition: 0.5s; overflow: hidden; }
+		#userListContainer:hover { width: 150px; max-height: 100%; border-radius: 0; }
+		#userListContainer:hover * { opacity: 1; }
 		.system { font-weight: bold; }
 		.container { background: #fff; box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2); transition: 0.5s; }
 		.container:hover { box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.5); z-index: 15; }
+		@keyframes background-move {
+			from { background-position: 0 0; }
+			to { background-position: 14px -14px; }
+		}
 	</style>
 	<link rel="stylesheet" href="style/style.css" type="text/css">
 	<script src="/socket.io/socket.io.js"></script>
