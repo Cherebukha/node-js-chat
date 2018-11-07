@@ -10,6 +10,9 @@ express.get('/', function(req, res) {
 express.get('/style/style.css', function(req, res) {
 	res.sendFile(__dirname + '/public/style/style.css');
 });
+express.get('/js/script.js', function(req, res) {
+	res.sendFile(__dirname + '/public/js/script.js');
+});
 
 io.on('connection', function(socket) {
 	io.emit('update user list', userList);
