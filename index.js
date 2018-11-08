@@ -45,6 +45,7 @@ io.on('connection', function(socket) {
 });
 
 http.listen(3000, function() {
+	if (!fs.existsSync('./history')) fs.mkdirSync('./history');
 	appendToFile('history/chat.txt', getCurrentTime() + ' It\'s working...\n');
 	console.log('Прослушивание порта 3000');
 });
