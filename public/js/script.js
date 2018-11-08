@@ -16,7 +16,7 @@ $('#nickname').submit(function() {
 	return false;
 });
 $('#message').submit(function() {
-	if ($('messageInput').val() == "") return false;
+	if ($('#messageInput').val() == "" || $('#messageInput').val() == null) return false;
 	console.log($('messageInput').val());
 	socket.emit('send message', $('#messageInput').val());
 	$('#messageInput').val('');
