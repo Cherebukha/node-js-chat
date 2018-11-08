@@ -1,4 +1,5 @@
 var socket = io();
+var nickname;
 socket.on('update user list', function(userList) {
 	$('#userList').empty();
 	userList.sort();
@@ -21,10 +22,18 @@ $('#message').submit(function() {
 	$('#messageInput').val('');
 	return false;
 });
+$('#messageInput').bind('keypress', function() {
+	socket.emit('message typing', nickname);
+});
 socket.on('join', function(status, name) {
 	$('#messages').append($('<li class="system">').text('User ' + status + ': ' + name));
+	nickname = name;
 });
 socket.on('send message', function(name, msg) {
 	$('#messages').append($('<li>').text(name + ': ' + msg));
+	$('#chatTyping').hide();
 	$('#chatContainer').animate({ scrollTop: $('#chatContainer').height() }, 'fast');
+});
+socket.on('message typing', function(nickname) {
+	$('#chatTyping').text(nickname + ' is typing...').show().delay(3000).fadeOut();
 });

@@ -17,12 +17,17 @@ express.get('/js/script.js', function(req, res) {
 io.on('connection', function(socket) {
 	io.emit('update user list', userList);
 	socket.on('set nickname', function(name) {
+		if (searchArr(userList, name) > 0) console.log('Пользователь с ником ' + name + ' уже подключен');
+		socket.nickname = name;
 		appendToFile('history/chat.txt', getCurrentTime() + ' User joined: ' + name + '\n');
 		io.emit('join', 'joined', name);
 		userList[userList.length] = name;
 		console.log('User joined: ' + name);
 		io.emit('set nickname', name);
 		io.emit('update user list', userList);
+		socket.on('message typing', function(nickname) {
+			socket.broadcast.emit('message typing', socket.nickname);
+		});
 		socket.on('send message', function(msg) {
 			console.log(name + ': ' + msg);
 			appendToFile('history/chat.txt', getCurrentTime() + ' ' + name + ': ' + msg + '\n');
@@ -56,4 +61,10 @@ function getCurrentTime() {
 	if (day < 10) day = '0' + day;
 	if (month < 10) month = '0' + month;
 	return '(' + hour + ':' + minute + ':' + second + ' ' + day + '.' + month + '.' + year + ')';
+}
+
+function searchArr(arr, word) {
+	return arr.filter(function(el) {
+		return el.toLowerCase().indexOf(word.toLowerCase()) > -1;
+	}).length;
 }
