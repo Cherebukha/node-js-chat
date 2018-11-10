@@ -10,11 +10,9 @@ socket.on('update user list', function(userList) {
 $('#nickname').submit(function() {
 	if ($('#nickname input').val() == "") return false;
 	socket.emit('set nickname', $('#nicknameInput').val(), $('#p').val());
-	$('#overlay').fadeOut(300);
-	$('#nickname input').val('');
-	document.getElementById('messageInput').focus();
 	return false;
 });
+
 $('#message').submit(function() {
 	if ($('#messageInput').val() == "" || $('#messageInput').val() == null) return false;
 	console.log($('messageInput').val());
@@ -24,6 +22,14 @@ $('#message').submit(function() {
 });
 $('#messageInput').bind('keypress', function() {
 	socket.emit('message typing', nickname);
+});
+socket.on('nickname denied', function(text) {
+	$('#joinMessage').show().text(text).delay(5000).fadeOut();
+});
+socket.on('nickname accepted', function() {
+	$('#overlay').fadeOut(300);
+	$('#nickname input').val('');
+	document.getElementById('messageInput').focus();
 });
 socket.on('join', function(status, name) {
 	$('#messages').append($('<li class="system">').text('User ' + status + ': ' + name));
@@ -36,4 +42,9 @@ socket.on('send message', function(name, msg) {
 });
 socket.on('message typing', function(nickname) {
 	$('#chatTyping').text(nickname + ' is typing...').show().delay(3000).fadeOut();
+});
+
+$(function() {
+	$('#chat').resizable({handles: 'n, e, s, w, ne, se, sw, nw'});
+	$('#chat').draggable({ containment: 'body', scroll: false });
 });

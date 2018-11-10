@@ -6,12 +6,17 @@
 *:focus {
 	outline: 0;
 }
+body {
+	overflow: hidden;
+	max-width: 100%;
+	width: 100vw;
+	max-height: 100%;
+	height: 100vh
+}
 body, input, button {
 	font: 14px Tahoma;
 }
 #main {
-	display: flex;
-	align-items: center;
 	max-width: 100%;
 	width: 100vw;
 	max-height: 100%;
@@ -21,12 +26,18 @@ body, input, button {
 	animation: background-move 2s linear infinite;
 }
 #chat {
+	position: relative;
+	top: 20%;
+	left: 20%;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
+	min-width: 300px;
+	max-width: 90vw;
 	width: 700px;
+	min-height: 300px;
+	max-height: 90vh;
 	height: 500px;
-	margin: 0 auto;
 }
 #chatContainer {
 	overflow: auto;
@@ -45,10 +56,12 @@ body, input, button {
 }
 #overlay {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	position: absolute;
 	top: 0;
-	z-index: 10;
+	z-index: 100;
 	width: 100vw;
 	height: 100vh;
 	background: rgba(255, 255, 255, 0.8);
@@ -81,6 +94,11 @@ body, input, button {
 	padding: 5px;
 	padding-right: 10px;
 	border-radius: 0 15px 15px 0;
+}
+#joinMessage {
+	display: none;
+	padding: 10px;
+	color: #a22;
 }
 #message {
 	width: 100%;
@@ -138,6 +156,7 @@ button:hover {
 	max-height: 50px;
 	border-bottom-left-radius: 100%;
 	padding: 1em;
+	transition: 0.5s;
 }
 #userListContainer * {
 	opacity: 0;
@@ -158,7 +177,7 @@ button:hover {
 .container {
 	background: #fff;
 	box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
-	transition: 0.5s;
+	transition: box-shadow 0.5s;
 }
 .container:hover {
 	box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);

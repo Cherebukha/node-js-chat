@@ -3,9 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>NodeJS Chat</title>
-	<link rel="stylesheet" href="style/style.css" type="text/css">
+	<link rel="stylesheet" href="style/style.css" type="text/css" />
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 </head>
 <body>
 	<div id="main">
@@ -31,6 +33,7 @@
 				<input id="nicknameInput" autocomplete="off" type="text" maxlength="14" placeholder="Your nickname" autofocus /><button>Enter</button>
 			</form>
 		</div>
+		<span id="joinMessage"></span>
 	</div>
 	<script src="js/script.js"></script>
 </body>
