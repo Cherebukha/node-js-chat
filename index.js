@@ -15,11 +15,12 @@ express.get('/js/script.js', function(req, res) {
 });
 
 io.on('connection', function(socket) {
-	io.emit('update user list', userList);
+	console.log(socket);
+	socket.emit('update user list', userList);
 	socket.on('set nickname', function(name) {
 		if (searchArr(userList, name) > 0) {
 			console.log('Пользователь с ником ' + name + ' уже подключен');
-			io.emit('nickname denied', 'That nickname is already taken');
+			socket.emit('nickname denied', 'That nickname is already taken');
 			return false;
 		}
 		socket.emit('nickname accepted');
